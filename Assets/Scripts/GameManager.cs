@@ -31,11 +31,13 @@ public class GameManager : Singleton<GameManager>
 
     void OnGUI()
     {
-        if(GUILayout.Button("Next Scene"))
+        GUILayout.BeginArea(new Rect(0, 120, 100, 100));
+        if (GUILayout.Button("Next Scene"))
         {
+          
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
-        
+        GUILayout.EndArea();
     }
 
 }
