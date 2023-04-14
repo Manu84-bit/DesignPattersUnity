@@ -17,22 +17,27 @@ public class ClientState : MonoBehaviour
 
     private void OnGUI()
     {
-        if(GUILayout.Button("Start player"))
+        if (_playerController._showControls)
         {
-            _playerController.StartPlayer();
-        } 
-        if(GUILayout.Button("Stop Player"))
-        {
-            _playerController.StopPlayer();
+            if (GUILayout.Button("Start player"))
+            {
+                _playerController.StartPlayer();
+            }
+            if (GUILayout.Button("Stop Player"))
+            {
+                _playerController.StopPlayer();
+            }
+            if (GUILayout.Button("Right"))
+            {
+                _playerController.TurnPlayer(PlayerController.Direction.RIGHT);
+            }
+            if (GUILayout.Button("Left"))
+            {
+                _playerController.TurnPlayer(PlayerController.Direction.LEFT);
+            }
+
         }
-        if (GUILayout.Button("Right"))
-        {
-            _playerController.TurnPlayer(PlayerController.Direction.RIGHT);
-        }
-        if (GUILayout.Button("Left"))
-        {
-            _playerController.TurnPlayer(PlayerController.Direction.LEFT);
-        }
+       
 
     }
 }

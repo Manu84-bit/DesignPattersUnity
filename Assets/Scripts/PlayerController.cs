@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool _showControls = false;
     //Player context that has access to player states and can modify them:
     private PlayerContext _playerContext;
     //Possible states of the player:
@@ -72,5 +73,28 @@ public class PlayerController : MonoBehaviour
         RIGHT = 1, LEFT=-1
     }
 
-   
+    private void OnEnable()
+    {
+        GlobalEventBus.Subscribe(GlobalEventType.STARTED, EnableVehicle);
+        GlobalEventBus.Subscribe(GlobalEventType.STOPPED, DisableVehicle);
+    }
+
+    private void OnDisable()
+    {
+        GlobalEventBus.UnSubscribe(GlobalEventType.STARTED, EnableVehicle);
+        GlobalEventBus.UnSubscribe(GlobalEventType.STOPPED, DisableVehicle);
+    }
+
+    private void EnableVehicle()
+    {
+        _showControls = true;
+        //CurrentSpeed = maxSpeed;
+    }
+
+    private void DisableVehicle()
+    {
+        _showControls = false;
+        gameObject.transform.position = Vector3.zero;
+        CurrentSpeed = 0;
+    }
 }

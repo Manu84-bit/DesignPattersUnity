@@ -10,6 +10,8 @@ public class ClientGlobalEvent : MonoBehaviour
     {
         //Add the classes that contain the callbacks for each of the global events:
         gameObject.AddComponent<CountDownTimer>();
+        //gameObject.AddComponent<PlayerController>();
+        gameObject.AddComponent<HUDController>();
         //...
 
         _countdownBtnEnabled = true;
