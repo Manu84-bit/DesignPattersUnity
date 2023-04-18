@@ -11,33 +11,67 @@ public class ClientState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = (PlayerController) FindObjectOfType(typeof(PlayerController));
+        _playerController = (PlayerController)FindObjectOfType(typeof(PlayerController));
 
     }
 
-    private void OnGUI()
+    private void Update()
     {
-        if (_playerController._showControls)
+        float _verticalInput = Input.GetAxis("Vertical");
+        float _horizontalInput = Input.GetAxis("Horizontal");
+    
+
+        if (_playerController.showControls)
         {
-            if (GUILayout.Button("Start player"))
+            if (_verticalInput > 0)
             {
-                _playerController.StartPlayer();
+                _playerController.StartPlayer(PlayerController.Direction.UP);
             }
-            if (GUILayout.Button("Stop Player"))
+            else if(_verticalInput < 0)
             {
-                _playerController.StopPlayer();
+                _playerController.StartPlayer(PlayerController.Direction.DOWN);
             }
-            if (GUILayout.Button("Right"))
+
+            if (_horizontalInput > 0)
             {
                 _playerController.TurnPlayer(PlayerController.Direction.RIGHT);
             }
-            if (GUILayout.Button("Left"))
+            else if(_horizontalInput < 0)
             {
                 _playerController.TurnPlayer(PlayerController.Direction.LEFT);
             }
 
-        }
-       
 
+        }
     }
+
+    //private void OnGUI()
+    //{
+    //    if (_playerController._showControls)
+    //    {
+    //        //if (GUILayout.Button("Start player"))
+    //        //{
+    //        //    _playerController.StartPlayer();
+    //        //}
+    //        //if (GUILayout.Button("Stop Player"))
+    //        //{
+       
+    //        //}
+    //        //if (GUILayout.Button("Right"))
+    //        //{
+    //        //    _playerController.TurnPlayer(PlayerController.Direction.RIGHT);
+    //        //}
+    //        //if (GUILayout.Button("Left"))
+    //        //{
+    //        //    _playerController.TurnPlayer(PlayerController.Direction.LEFT);
+    //        //}
+
+    //    }
+
+
+    //}
+
 }
+
+
+

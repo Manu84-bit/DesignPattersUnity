@@ -19,7 +19,7 @@ public class TurnState : MonoBehaviour, IPlayerState
         if(_playerController.CurrentSpeed > 0)
         {
             _playerController.transform.Translate(
-                _turnDirection * _playerController.turnDistance
+                _playerController.turnDistance * Time.deltaTime * _turnDirection
                 );
         }
 

@@ -7,9 +7,14 @@ using UnityEngine;
 //It exists to offer an interface to control the bike,
 //expose its configurable properties, and manage its structural dependencies.
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Subject
 {
-    public bool _showControls = false;
+
+    private HUDController _hudController;
+    private CameraController _cameraController;
+
+
+    public bool showControls = false;
     //Player context that has access to player states and can modify them:
     private PlayerContext _playerContext;
     //Possible states of the player:
@@ -17,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     //Fields that characterize the player by default:
     public float maxSpeed = 2.0f;
-    public float turnDistance = 2.0f;
+    public float turnDistance = 1.0f;
 
     //Modifiable properties:
     public float CurrentSpeed
@@ -29,7 +34,13 @@ public class PlayerController : MonoBehaviour
     {
         get;
         set;
-    } 
+    }
+
+    public Direction CurrentMoveDirection
+    {
+        get;
+        set;
+    }
 
 
 
@@ -52,8 +63,9 @@ public class PlayerController : MonoBehaviour
 
     //Methods to trigger states:
 
-    public void StartPlayer()
+    public void StartPlayer(Direction direction)
     {
+        CurrentMoveDirection = direction;
         _playerContext.Transition(_startState);
     } 
     
@@ -70,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     public enum Direction
     {
-        RIGHT = 1, LEFT=-1
+        RIGHT = 2, LEFT=-2, UP= 1, DOWN = -1
     }
 
     private void OnEnable()
@@ -87,14 +99,17 @@ public class PlayerController : MonoBehaviour
 
     private void EnableVehicle()
     {
-        _showControls = true;
+        showControls = true;
         //CurrentSpeed = maxSpeed;
     }
 
     private void DisableVehicle()
     {
-        _showControls = false;
+        showControls = false;
         gameObject.transform.position = Vector3.zero;
         CurrentSpeed = 0;
     }
+
+    
+
 }
